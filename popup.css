@@ -1,0 +1,466 @@
+body {
+    min-width: 700px;
+    max-width: 100%;
+    min-height: 300px;
+    max-height: 1000px;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: #C7C7C7;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 300px;
+    max-height: 1000px;
+}
+
+.fixed-section {
+    flex-shrink: 0;
+    padding: 20px;
+    background-color: #2A2A2A;
+}
+
+.scrollable-section {
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px 20px 0;
+    background-color: #1A1A1A;
+    min-height: 400px;
+    width: calc(100% - 40px); /* Adjust width to account for padding */
+}
+
+button {
+    background-color: #3C3C3C;
+    color: #C7C7C7;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+.top-row {
+    display: flex;
+    gap: 12px;
+}
+.top-row button {
+    width: 128px;
+    height: 28px;
+}
+.input-row {
+    margin-top: 20px;
+    display: flex;
+    gap: 13px;
+}
+#groupInput {
+    width: 300px;
+    height: 28px;
+    background-color: #B5B5B5;
+    border: none;
+    padding: 0 10px;
+    color: black;
+}
+#inputAction {
+    width: 94px;
+    height: 28px;
+}
+
+.group-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-bottom: 3px;
+    width: 100%;
+    justify-content: flex-start;
+    cursor: move;
+    background-color: #282828;
+    padding: 6px;
+    align-items: center;
+	border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.group-row-highlighted {
+  border: 2px solid yellow;
+}
+
+.group-row:hover {
+    background-color: #3E3E3E; /* Hover effect */
+}
+
+.group-row.dragging {
+    opacity: 0.5;
+}
+
+.group-row.drag-over {
+    border-top: 2px solid #ff0000;
+}
+
+.group-row > * {
+    flex: 0 0 auto; /* Prevent children from growing or shrinking */
+}
+
+.group-row > button {
+    order: 0;
+}
+
+.group-row .tab-list {
+    flex-basis: 100%;
+    margin-top: 10px;
+    order: 1;
+    padding: 7px; /* Added padding to tab list for consistency */
+}
+
+.group-row button {
+    height: 30px;
+    width: 30px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px 20px; /* Slightly smaller than button height */
+    padding-left: 25px; /* Make room for the icon */
+    justify-content: flex-start; /* Align content to the left */
+}
+.group-name {
+    width: 250px !important; /* Force width to 200px */
+    height: 30px;
+    text-align: left;
+    padding-left: 29px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    justify-content: flex-start;
+    font-size: 14px;
+    color: #C7C7C7;
+    /* background-color: inherit; */
+    display: flex;
+    align-items: center;
+}
+.group-row .save {
+    display: flex;
+    width: 70px !important; /* Force the width to 60px */
+    background-color: #1E5233 !important; /* Basic color */
+    background-image: url('icons/icon_gr-button_save.svg') !important;
+}
+.group-row .save:hover {
+    background-color: #2F784C !important;
+}
+.group-row .save:active {
+    background-color: #062D16 !important;
+}
+.group-row button:not(.group-name):not(.save):hover {
+    opacity: 1;
+}
+.group-row button:not(.group-name):not(.save):active {
+    color: #3C3C3C;
+    background-color: transparent;
+}
+.group-row button:not(.save) {
+    width: 40px; /* Keep this as default for other buttons */
+}
+.group-row button:not(.group-name):not(.save) {
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+.group-row .save { background-image: url('icons/icon_gr-button_save.svg'); }
+.group-row .copy { background-image: url('icons/icon_gr-button_copy.svg'); }
+.group-row .rename { background-image: url('icons/icon_gr-button_rename.svg'); }
+.group-row .first { background-image: url('icons/icon_gr-button_top.svg'); }
+.group-row .last { background-image: url('icons/icon_gr-button_bottom.svg'); }
+.group-row .delete { background-image: url('icons/icon_gr-button_delete.svg'); }
+.group-row .export { background-image: url('icons/icon_gr-button_export.svg'); }
+.group-row .import { background-image: url('icons/icon_gr-button_import.svg'); }
+
+.group-row:hover button:not(.group-name):not(.save) {
+    display: flex;
+}
+
+/* New styles for bottom section */
+.bottom-section {
+    padding: 20px 33px;
+}
+.bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bottom-buttons {
+    display: flex;
+    gap: 12px;
+}
+.bottom-buttons button {
+    width: 128px;
+    height: 28px;
+}
+#status {
+    margin-left: 20px;
+    text-align: right;
+    flex-grow: 1;
+}
+
+/* General button hover and active states */
+button:not(.group-name):hover {
+    background-color: #5A5A5A;
+}
+
+button:not(.group-name):active {
+    background-color: #131313;
+}
+
+/* Specific hover and active states for top and bottom buttons */
+.top-row button:hover,
+.bottom-buttons button:hover {
+    background-color: #5A5A5A;
+}
+
+.top-row button:active,
+.bottom-buttons button:active {
+    background-color: #131313;
+}
+
+/* Hover and active states for group action buttons */
+.group-row button:not(.group-name):hover {
+    background-color: #5A5A5A;
+}
+
+.group-row button:not(.group-name):active {
+    background-color: #131313;
+}
+
+/* Ensure group name button doesn't change on hover or active */
+.group-name:hover,
+.group-name:active {
+    /* background-color: inherit; */
+}
+
+.group-row .first, .group-row .last {
+    width: 40px !important;
+}
+
+.group-row button:not(.group-name) {
+    width: 40px; /* Keep this as default for other buttons */
+    height: 30px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px 20px;
+    padding: 0;
+    font-size: 0;
+    color: transparent;
+}
+
+.group-name {
+  flex-shrink: 1; /* Allow shrinking if necessary */
+  min-width: 100px; /* Minimum width to ensure visibility */
+  cursor: pointer;
+}
+
+.tab-list {
+    margin-top: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #555;
+    width: 100%;
+    box-sizing: border-box;
+    clear: both;
+}
+
+.tab-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px; /* Changed from 5px to 3px */
+    background-color: #2A2A2A; /* Changed from #444 to #2A2A2A */
+    border: 1px solid #565656; /* Added 1px stroke */
+    padding: 3px 5px; /* Adjusted padding to fit max 32px height */
+    border-radius: 3px;
+    max-height: 32px; /* Added max-height */
+}
+
+.tab-row:hover {
+    background-color: #4E4E4E; /* Added hover effect */
+}
+
+.tab-checkbox {
+    margin-right: 8px; /* Slightly reduced margin */
+}
+
+.tab-favicon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px; /* Slightly reduced margin */
+    object-fit: contain;
+}
+
+.tab-title {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 8px; /* Slightly reduced margin */
+    color: #C7C7C7;
+    font-size: 12px; /* Reduced font size to fit smaller row */
+}
+
+.tab-row button {
+    margin-left: 5px;
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 2px 5px;
+    cursor: pointer;
+}
+
+.tab-copy, .tab-open, .tab-delete {
+    width: 30px; /* Changed from 24px to 30px */
+    height: 24px; /* Changed from 24px to 24px */
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.tab-copy {
+    background-image: url('icons/icon_gr-button_copy.svg');
+}
+
+.tab-open {
+    background-image: url('icons/icon_gr-button_open.svg');
+}
+
+.tab-delete {
+    background-image: url('icons/icon_gr-button_delete.svg');
+}
+
+.tab-copy:hover, .tab-open:hover, .tab-delete:hover {
+    background-color: #555;
+}
+
+.tab-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #333;
+    border-radius: 5px;
+}
+
+.tab-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3C3C3C;
+    color: #C7C7C7;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+	white-space: nowrap;
+}
+
+.action-label {
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.tab-actions button::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.tab-actions .copy-selected::before {
+    background-image: url('icons/icon_gr-button_copy.svg');
+}
+
+.tab-actions .open-selected::before {
+    background-image: url('icons/icon_gr-button_open.svg');
+}
+
+.tab-actions .delete-selected::before {
+    background-image: url('icons/icon_gr-button_delete.svg');
+}
+
+.group-buttons, .group-buttons-expanded {
+    display: none;
+    gap: 5px;
+    margin-left: auto;
+    flex-shrink: 1;
+    overflow-x: auto;
+}
+
+.group-buttons {
+    margin-left: auto;
+}
+
+.group-buttons-expanded {
+    display: none;
+}
+
+.group-row:hover .group-buttons {
+    display: flex;
+}
+
+.group-row .paste {
+    background-image: url('icons/icon_gr-button_paste.svg');
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #2A2A2A;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  color: #C7C7C7;
+}
+
+.modal-options {
+  margin: 10px 0;
+}
+
+.modal-buttons {
+  text-align: right;
+  margin-top: 10px;
+}
+
+#urlTextarea {
+  width: 100%;
+  background-color: #3C3C3C;
+  color: #C7C7C7;
+  border: 1px solid #555;
+}

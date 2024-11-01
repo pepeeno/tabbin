@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabbin</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="fixed-section">
+            <div class="top-row">
+                <button id="groupThese">GROUP these</button>
+                <button id="copyThese">COPY these</button>
+                <button id="newGroup">NEW group</button>
+            </div>
+            <div class="input-row" style="display: none;">
+                <input type="text" id="groupInput" placeholder="Enter group name">
+                <button id="inputAction">ACTION</button>
+            </div>
+        </div>
+
+        <div id="groupContainer" class="scrollable-section">
+            <!-- Group rows will be dynamically added here -->
+        </div>
+
+        <div class="fixed-section bottom-section">
+            <div class="bottom-row">
+                <div class="bottom-buttons">
+                    <button id="copyAll">COPY all</button>
+                    <button id="exportAll">EXPORT all</button>
+                    <button id="importAll">IMPORT all</button>
+                </div>
+                <div id="status"></div>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+	
+	<div id="pasteModal" class="modal">
+  <div class="modal-content">
+    <h2>Paste URLs</h2>
+    <textarea id="urlTextarea" rows="10" cols="50" placeholder="Paste URLs here, one per line..."></textarea>
+    <div class="modal-options">
+      <label>
+        <input type="radio" name="pasteOption" value="append" checked> Append to existing tabs
+      </label>
+      <label>
+        <input type="radio" name="pasteOption" value="replace"> Replace existing tabs
+      </label>
+    </div>
+    <div class="modal-buttons">
+      <button id="addUrlsButton">Add</button>
+      <button id="cancelPasteButton">Cancel</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
